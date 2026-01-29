@@ -89,3 +89,6 @@ copy /b build\boot.bin + build\kernel.bin build\arainos.bin
 
 + Kernel prints: `"Arain"` on the screen
 
+## 📸Screen Shorts
+<img src="">
+
