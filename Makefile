@@ -1,8 +1,8 @@
 NASM = nasm
 CC   = gcc
 LD   = ld
-CFLAGS = -ffreestanding -O2 -m32 -c
-LDFLAGS = -Ttext 0x1000
+CFLAGS = -ffreestanding -O2 -m32 -c -fno-pic -fno-pie
+LDFLAGS = -m elf_i386 -Ttext 0x1000 --oformat binary
 
 BUILD_DIR = build
 
