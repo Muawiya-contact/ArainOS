@@ -58,7 +58,26 @@ ArainOS/
 
 ---
 
-## 🏃 How to Build and Run (Week 2 Example)
+## 🏃 How to Build and Run
+
+> **For detailed contribution guidelines and setup instructions, see [CONTRIBUTING.md](CONTRIBUTING.md)**
+
+### Build (Linux/macOS/WSL)
+
+The easiest way to build on POSIX systems is using the provided Makefile:
+
+```bash
+# Build the OS
+make
+
+# Build and run in QEMU
+make run
+
+# Clean build artifacts
+make clean
+```
+
+### Build (Windows)
 
 ### 1. Assemble Bootloader
 ```powershell
