@@ -1,0 +1,68 @@
+ProjectReport.pdf Table of Contents (Draft)
+1.	Phase 1 – Project Setup & Initial Folder Structure 
+2.	Phase 2 – Bootloader & Kernel Entry
+3.	Phase 3 – Memory Management & MMU Initialization
+4.	Phase 4 – System Calls & Userland Interface
+5.	Phase 5 – Drivers & Device Model
+6.	Phase 6 – File System & VFS Layer
+7.	Phase 7 – GUI & Compositor
+8.	Phase 8 – Testing, CI, and Final Packaging
+9.	References & Resources
+________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Phase 1 – Project Setup & Initial Folder Structure
+Objective:
+Set up the initial repository and project structure for ArainOS, ensuring a modular and maintainable layout that supports future expansion (kernel, drivers, user apps, GUI, etc.) and prepares for building in virtual machines.
+Tasks Completed:
+1.	Created the main repository: OS/.
+2.	Added essential top-level files:
+o	README.md → project overview and setup instructions
+o	ProjectReport.pdf → this report documenting progress
+3.	Designed initial folder hierarchy inside `OS/`:
+```
+OS/
+├── include/           # Global header files (kernel, arch, user ABI)
+├── boot/              # BIOS/UEFI bootloader code
+├── kernel/            # Kernel source (core, sched, syscall)
+├── arch/              # Architecture-specific code (x86_64)
+├── mm/                # Memory management modules
+├── drivers/           # Device drivers (pci, input, display)
+├── fs/                # Filesystem modules
+├── net/               # Networking modules
+├── libk/              # Kernel library
+├── user/              # Userland programs & libc
+├── gui/               # GUI / compositor
+├── tools/             # Build and utility tools
+├── scripts/           # Build / run / packaging scripts
+├── tests/             # Unit and integration tests
+├── build/             # Out-of-tree build outputs
+├── iso/               # Final ISO images for VM
+├── config/            # Build-time config & feature toggles
+└── doc/               # Documentation (BUILD.md, DESIGN.md)
+
+```
+Key Decisions & Rationale:
+
+•	include/ is the single source of truth for all headers.
+•	kernel and user code are strictly separated to maintain clean user/kernel boundaries.
+•	Prepared structure to easily integrate syscalls, drivers, GUI, filesystem, and networking in future phases.
+•	Out-of-tree build/ keeps repository clean and simplifies cross-architecture builds.
+•	Scripts are placed in scripts/ to allow both Linux and Windows (PowerShell) builds.
+Outcome:
+•	Phase 1 establishes the foundation of ArainOS.
+•	Project hierarchy ensures modularity, scalability, and maintainability for all remaining phases.
+

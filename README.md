@@ -1,113 +1,133 @@
-# Arain OS
+# ArainOS - A Learning-Focused x86_64 Operating System
 
-**Arain OS** is a custom educational operating system developed from scratch using **Assembly** and **C**.  
-The goal is to build a small but fully functional OS over **8 weeks**, running in a virtual machine.
+## Overview
 
----
+ArainOS is an educational operating system project demonstrating the design and implementation of a modern 64-bit OS for x86_64 architecture. Built from scratch with comprehensive documentation, it progresses through 8 phases from bootloader to a fully functional GUI-based system.
 
-## 🌟 Project Overview
+**Current Status:** Phase 1 Complete ✓  
+**Target:** Phase 2 (Long Mode Transition)
 
-- Bootloader written in **Assembly (NASM)**  
-- Kernel written in **C (freestanding)**  
-- Runs safely in **QEMU**  
-- Goal: Understand OS concepts like **booting, kernel, interrupts, and keyboard input**  
-
----
-
-## 📁 Project Structure
+## Repository Structure
 
 ```
 ArainOS/
-├── boot/ # Bootloader source code (ASM)
-│ └── boot.asm
-├── kernel/ # Kernel source code (C)
-│ └── kernel.c
-├── build/ # Compiled binaries
-├── docs/ # Notes and documentation
-├── screenshots/ # Screenshots of OS running in VM
-├── .gitignore/
-└── README.md # This file
+├── OS/                      # Main OS source code (see OS/README.md)
+├── README.md               # This file
+└── ProjectReport.md        # Complete documentation of all 8 phases
 ```
 
-
----
-
-## 🛠 Tools Used
-
-- **NASM** – Assembler for bootloader  
-- **GCC** – Freestanding C compiler for kernel  
-- **LD** – Linker for kernel  
-- **QEMU** – Virtual machine for testing OS  
-- **Git** – Version control  
-- **GitHub** – Remote repository
-
----
-
-## 🗓 8-Week Roadmap
-
-| Week | Goal / Task | Status |
-|------|-------------|--------|
-| 1 | Setup project, install NASM, GCC, QEMU; write bootloader that prints message | ✅ Done |
-| 2 | Create freestanding C kernel; bootloader jumps to kernel; kernel prints text | ✅ Done |
-| 3 | Implement keyboard input via interrupts; make OS interactive | 🔜 Planned |
-| 4 | Implement basic memory management; support multiple characters on screen | 🔜 Planned |
-| 5 | Implement simple file system (load data from disk image) | 🔜 Planned |
-| 6 | Add simple task switching / multitasking | 🔜 Planned |
-| 7 | Implement basic timer interrupts and hardware integration | 🔜 Planned |
-| 8 | Finalize OS; full demo with keyboard input, multitasking, and display | 🔜 Planned |
-
----
-
-## 🏃 How to Build and Run
-
-> **For detailed contribution guidelines and setup instructions, see [CONTRIBUTING.md](CONTRIBUTING.md)**
-
-### Build (Linux/macOS/WSL)
-
-The easiest way to build on POSIX systems is using the provided Makefile:
+## Quick Start
 
 ```bash
-# Build the OS
-make
-
-# Build and run in QEMU
-make run
-
-# Clean build artifacts
-make clean
+cd OS
+make iso && make run
 ```
 
-### Build (Windows)
+**Expected Output:** "Hello ArainOS" printed to VGA in QEMU
 
-### 1. Assemble Bootloader
-```powershell
-nasm boot\boot.asm -f bin -o build\boot.bin
-```
-2. Compile Kernel
-```powershell
-gcc -ffreestanding -c kernel\kernel.c -o build\kernel.o
-```
-4. Link Kernel
-```powershell
-ld -Ttext 0x1000 build\kernel.o -o build\kernel.bin
-```
+See [OS/doc/BUILD.md](OS/doc/BUILD.md) for detailed setup instructions.
 
-6. Combine Bootloader + Kernel
-```powershell
-copy /b build\boot.bin + build\kernel.bin build\arainos.bin
-```
+## Project Goals
 
-8. Run in QEMU
-```powershell
-"C:\Program Files\qemu\qemu-system-x86_64.exe" build\arainos.bin
-```
+1. **Educational:** Understand how modern operating systems work at the hardware level
+2. **Reproducible:** Works on Linux, WSL, Windows, and multiple emulators
+3. **Modular:** Easy to extend with new architectures (ARM64, RISC-V) and features
+4. **Well-Documented:** Every phase has clear goals, tasks, and deliverables
 
-### ✅ Output:
+## 8-Phase Development Plan
 
-+ Bootloader prints: `"Arain OS booting Kernel..."`
+| Phase | Goal | Status |
+|-------|------|--------|
+| 1 | Project Foundation & Build Setup | ✓ Complete |
+| 2 | Bootloader & Kernel Entry | → In Progress |
+| 3 | Core Kernel & Process Management | Planned |
+| 4 | Syscall Layer & Userland | Planned |
+| 5 | Filesystem & Storage | Planned |
+| 6 | Drivers & Input/Output | Planned |
+| 7 | GUI & Compositor | Planned |
+| 8 | Testing, CI, and Installer | Planned |
 
-+ Kernel prints: `"Arain"` on the screen
+**Estimated Timeline:** 8-16 weeks (part-time)
 
-## 📸Screen Shorts
-<img src="https://github.com/Muawiya-contact/ArainOS/blob/main/screenshorts/Screenshot%202026-01-29%20212704.png">
+## Key Files
 
+- [OS/README.md](OS/README.md) - OS architecture and folder structure
+- [OS/doc/ROADMAP.md](OS/doc/ROADMAP.md) - Detailed 8-phase plan with tasks and deliverables
+- [OS/doc/BUILD.md](OS/doc/BUILD.md) - Build system and toolchain setup
+- [OS/doc/WINDOWS_SETUP.md](OS/doc/WINDOWS_SETUP.md) - Windows development guide
+- [OS/Makefile](OS/Makefile) - Top-level build orchestration
+
+## What You'll Learn
+
+- **Bootloaders:** BIOS/UEFI multiboot, real to protected to long mode
+- **Memory Management:** Paging, virtual addressing, heap allocation
+- **Concurrency:** Context switching, scheduling, process management
+- **System Calls:** Userland/kernel boundary, privilege levels
+- **Filesystems:** VFS abstraction, RAMFS, file I/O
+- **Device Drivers:** Hardware abstraction, interrupt handling
+- **GUI:** Framebuffer graphics, window management, input handling
+
+## Technical Specifications
+
+- **Target Architecture:** x86_64
+- **Bootloader:** GRUB (multiboot)
+- **Kernel:** Freestanding C
+- **Build System:** Make + cross-compiler (x86_64-elf-gcc)
+- **Testing:** QEMU, VirtualBox
+- **CI/CD:** GitHub Actions (planned)
+
+## Getting Started
+
+1. **Clone & Setup:**
+   ```bash
+   git clone https://github.com/yourusername/ArainOS.git
+   cd ArainOS/OS
+   ```
+
+2. **Check Requirements:**
+   - Linux/WSL: See [OS/doc/BUILD.md](OS/doc/BUILD.md)
+   - Windows: See [OS/doc/WINDOWS_SETUP.md](OS/doc/WINDOWS_SETUP.md)
+
+3. **Build & Run:**
+   ```bash
+   make iso && make run
+   ```
+
+4. **Next Steps:**
+   - Read [OS/doc/ROADMAP.md](OS/doc/ROADMAP.md) for Phase 2 tasks
+   - Check individual phase implementation guides in `OS/doc/`
+
+## Documentation
+
+All documentation is in [OS/doc/](OS/doc/):
+- **ROADMAP.md** - Complete 8-phase plan
+- **BUILD.md** - Build system and toolchain
+- **DESIGN.md** - Architecture and design notes
+- **WINDOWS_SETUP.md** - Windows developer setup
+- **API.md** - Kernel and user-space API
+
+## Resources & References
+
+- [OSDev.org](https://wiki.osdev.org/) - OS development wiki
+- [Intel x86-64 ABI](https://github.com/hjl-tools/x86-psABI) - ABI specification
+- [GRUB Multiboot](https://www.gnu.org/software/grub/manual/multiboot/) - Multiboot spec
+- [Linux Kernel Docs](https://www.kernel.org/doc/html/latest/) - Reference implementation
+
+## Contributing
+
+This is primarily an educational project. Feel free to fork and extend with:
+- Additional architectures (ARM64, RISC-V)
+- Advanced scheduling algorithms
+- Network stack implementation
+- Filesystem drivers (EXT2, FAT32)
+- Improved GUI capabilities
+
+## License
+
+See [OS/LICENSE](OS/LICENSE)
+
+---
+
+**Last Updated:** February 2026  
+**Current Phase:** 1 ✓  
+**Next Phase:** 2 (Long Mode Transition)
